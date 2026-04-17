@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=adbgui
+Exec=org.adb.gui
+Icon=org.adb.gui
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

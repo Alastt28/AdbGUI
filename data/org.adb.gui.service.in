@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.adb.gui
+Exec=@bindir@/org.adb.gui --gapplication-service

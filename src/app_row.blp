@@ -1,0 +1,20 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AppRow : Adw.ActionRow {
+  [prefix]
+  Gtk.CheckButton select_checkbox {
+    valign: center;
+    toggled => $on_checkbox_toggled();
+  }
+
+  title: _("Название приложения");
+  subtitle: _("com.package.name");
+
+  [suffix]
+  Gtk.Button action_button {
+    icon-name: "system-shutdown-symbolic";
+    styles ["flat"]
+    clicked => $on_action_clicked();
+  }
+}
