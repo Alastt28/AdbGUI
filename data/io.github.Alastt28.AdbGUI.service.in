@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=io.github.Alastt28.AdbGUI
+Exec=@bindir@/io.github.Alastt28.AdbGUI --gapplication-service

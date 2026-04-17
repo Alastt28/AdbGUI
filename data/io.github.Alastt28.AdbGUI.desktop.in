@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=adbgui
-Exec=app.adb.gui
-Icon=app.adb.gui
+Exec=io.github.Alastt28.AdbGUI
+Icon=io.github.Alastt28.AdbGUI
 Terminal=false
 Type=Application
 Categories=Utility;

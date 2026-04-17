@@ -1,8 +1,8 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/app.adb.gui.desktop.in
-data/app.adb.gui.metainfo.xml.in
-data/app.adb.gui.gschema.xml
+data/io.github.Alastt28.AdbGUI.desktop.in
+data/io.github.Alastt28.AdbGUI.metainfo.xml.in
+data/io.github.Alastt28.AdbGUI.gschema.xml
 src/main.js
 src/window.js
 src/window.ui

@@ -1,9 +1,9 @@
 {
-    "id" : "app.adb.gui",
+    "id" : "io.github.Alastt28.AdbGUI",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "49",
     "sdk" : "org.gnome.Sdk",
-    "command" : "app.adb.gui",
+    "command" : "io.github.Alastt28.AdbGUI",
     "finish-args" : [
         "--share=network",
         "--share=ipc",

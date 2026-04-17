@@ -22,8 +22,8 @@ foreach blp_name : blueprints
     command: [blueprint_compiler, 'compile', '--output', '@OUTPUT@', '@INPUT@']
   )
 endforeach
-app_resources = gnome.compile_resources('app.adb.gui',
-  'app.adb.gui.gresource.xml',
+app_resources = gnome.compile_resources('io.github.Alastt28.AdbGUI',
+  'io.github.Alastt28.AdbGUI.gresource.xml',
   gresource_bundle: true,
   source_dir: meson.current_build_dir(),
   dependencies: compiled_ui,
@@ -38,7 +38,7 @@ bin_conf.set('PACKAGE_NAME', meson.project_name())
 bin_conf.set('prefix', get_option('prefix'))
 bin_conf.set('libdir', get_option('prefix') / get_option('libdir'))
 bin_conf.set('datadir', get_option('prefix') / get_option('datadir'))
-bin_conf.set('resource_path', '/app/adb/gui')
+bin_conf.set('resource_path', 'io/github/Alastt28/AdbGUI')
 
 python_sources = [
   'main.py',
@@ -48,8 +48,8 @@ python_sources = [
 install_data(python_sources, install_dir: pkgdatadir)
 
 configure_file(
-  input: 'app.adb.gui.in',
-  output: 'app.adb.gui',
+  input: 'io.github.Alastt28.AdbGUI.in',
+  output: 'io.github.Alastt28.AdbGUI',
   configuration: bin_conf,
   install: true,
   install_dir: get_option('bindir')

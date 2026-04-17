@@ -33,9 +33,9 @@ class AdbGuiApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='app.adb.gui',
+        super().__init__(application_id='io.github.Alastt28.AdbGUI',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
-                         resource_base_path='/app/adb/gui')
+                         resource_base_path='/io/github/Alastt28/AdbGUI')
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
@@ -63,7 +63,7 @@ class AdbGuiApplication(Adw.Application):
     def on_about_action(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(application_name='adb-gui',
-                                application_icon='app.adb.gui',
+                                application_icon='io.github.Alastt28.AdbGUI',
                                 developer_name='Alast',
                                 version='0.1.0',
                                 developers=['Alast'],

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="adbgui">
-	<schema id="app.adb.gui" path="/app/adb/gui/">
+	<schema id="io.github.Alastt28.AdbGUI" path="/io/github/Alastt28/AdbGUI/">
 	</schema>
 </schemalist>
