@@ -1,4 +1,4 @@
-application_id = 'org.adb.gui'
+application_id = 'app.adb.gui'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(

@@ -8,7 +8,7 @@ pkgdatadir = '@datadir@'
 project_dir = os.path.join(pkgdatadir, 'adbgui')
 
 def main():
-    resource_file = os.path.join(project_dir, 'org.adb.gui.gresource')
+    resource_file = os.path.join(project_dir, 'app.adb.gui.gresource')
     if os.path.exists(resource_file):
         Gio.Resource.load(resource_file)._register()
 

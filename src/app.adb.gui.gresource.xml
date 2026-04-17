@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/adb/gui">
+  <gresource prefix="/app/adb/gui">
     <file>window.ui</file>
     <file>app_row.ui</file>
   </gresource>

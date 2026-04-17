@@ -20,7 +20,7 @@
 import subprocess, threading, os
 from gi.repository import Gtk, Gdk, Adw, GLib
 
-@Gtk.Template(resource_path='/org/adb/gui/app_row.ui')
+@Gtk.Template(resource_path='/app/adb/gui/app_row.ui')
 class AppRow(Adw.ActionRow):
     __gtype_name__ = 'AppRow'
     action_button = Gtk.Template.Child()
@@ -139,7 +139,7 @@ class AppRow(Adw.ActionRow):
 
         threading.Thread(target=work, daemon=True).start()
 
-@Gtk.Template(resource_path='/org/adb/gui/window.ui')
+@Gtk.Template(resource_path='/app/adb/gui/window.ui')
 class AdbGuiWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'AdbGuiWindow'
 
