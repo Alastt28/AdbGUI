@@ -6,12 +6,12 @@
 ## Скриншоты
 <table>
   <tr>
-    <td><img src="screenshots/no_device.png" width="400"></td>
-    <td><img src="screenshots/loading.png" width="400"></td>
+    <td><img src="data/screenshots/no_device.png" width="400"></td>
+    <td><img src="data/screenshots/loading.png" width="400"></td>
   </tr>
   <tr>
-    <td><img src="screenshots/apps_list.png" width="400"></td>
-    <td><img src="screenshots/app_description.png" width="400"></td>
+    <td><img src="data/screenshots/apps_list.png" width="400"></td>
+    <td><img src="data/screenshots/app_description.png" width="400"></td>
   </tr>
 </table>
 
