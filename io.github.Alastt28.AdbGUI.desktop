@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=AdbGUI
+Comment=Управление приложениями через ADB
+Exec=adbgui
+Icon=io.github.Alastt28.AdbGUI
+Terminal=false
+Type=Application
+Categories=Utility
+StartupWMClass=adbgui

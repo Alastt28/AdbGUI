@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adbgui"
+version = "0.2.0"
+description = "ADB Application Manager for Android"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "PySide6",
+]
+
+[project.scripts]
+adbgui = "src.__main__:main"
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.setuptools.package-data]
+src = ["qml/*.qml"]
+
+[tool.pyside6-project]
+main-file = "src/__main__.py"
+modules = ["PySide6"]
+files = [
+    "data/bin/bridge.apk",
+    "data/icons/io.github.Alastt28.AdbGUI.svg",
+    "data/uad_lists.json",
+    "io.github.Alastt28.AdbGUI.desktop",
+    "io.github.Alastt28.AdbGUI.yaml",
+    "io.github.Alastt28.AdbGUI.metainfo.xml",
+    "README.md",
+    "meson.build",
+    "src/__init__.py",
+    "src/__main__.py",
+    "src/adb_manager.py",
+    "src/database_manager.py",
+    "src/main.qml",
+]

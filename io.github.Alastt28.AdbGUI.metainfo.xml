@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.Alastt28.AdbGUI</id>
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <name>AdbGUI</name>
+  <summary>GUI for ADB</summary>
+  <description>
+    <p>GUI for ADB</p>
+  </description>
+  <releases>
+    <release version="0.2.0" date="2025-05-13"/>
+  </releases>
+</component>
