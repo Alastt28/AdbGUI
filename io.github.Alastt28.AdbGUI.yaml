@@ -1,5 +1,7 @@
 id: io.github.Alastt28.AdbGUI
 branch: beta
+base: io.qt.PySide.BaseApp
+base-version: '6.10'
 runtime: org.kde.Platform
 runtime-version: '6.10'
 sdk: org.kde.Sdk
@@ -12,6 +14,33 @@ finish-args:
   - --socket=wayland
   - --device=all
 
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+  - rm -rf /app/lib/python3.13/site-packages/PySide6/examples
+  - rm -rf /app/lib/python3.13/site-packages/PySide6/doc
+  - find /app/lib/python3.13/site-packages/PySide6 -name "*.pyi" -delete
+  - rm -rf /app/lib/python3.13/site-packages/PySide6/Qt/qml/QtWebEngine
+  - rm -rf /app/lib/python3.13/site-packages/PySide6/Qt/qml/QtPdf
+  - rm -rf /app/lib/python3.13/site-packages/PySide6/Qt/translations
+  - rm -f /app/lib/libclang-cpp.so*
+  - rm -f /app/lib/libLLVM.so*
+  - rm -rf /app/lib/x86_64-linux-gnu
+  - rm -rf /app/lib/python3.13/site-packages/PySide6/QtWebEngine*
+  - rm -rf /app/lib/python3.13/site-packages/PySide6/include/QtWebEngine*
+  - rm -rf /app/lib/python3.13/site-packages/PySide6/glue/qtwebengine*
+  - rm -rf /app/lib/python3.13/site-packages/PySide6/typesystems/typesystem_webengine*
+  - rm -rf /app/lib/qml/QtWebEngine
+  - rm -rf /app/lib/plugins/webview/libqtwebview_webengine.so
+  - rm -rf /app/lib/libexec/QtWebEngineProcess
+  - rm -rf /app/lib/libexec/webenginedriver
+  - rm -rf /app/resources/qtwebengine_*
+  - rm -rf /app/translations
+  - rm -rf /app/lib/sbom/qtwebengine-*.spdx
+  - rm -rf /app/qtwebengine_dictionaries
+  - rm -rf /app/share/licenses/io.qt.qtwebengine.BaseApp
+  - rm -rf /app/share/licenses/io.qt.qtwebengine.BaseApp/qt6-qtwebengine
+  - rm -rf /app/bin/QtWebEngineProcess
+
 modules:
   - name: adb-binary
     buildsystem: simple
@@ -22,16 +51,6 @@ modules:
       - type: archive
         url: https://dl.google.com/android/repository/platform-tools_r37.0.0-linux.zip
         sha256: 198ae156ab285fa555987219af237b31102fefe8b9d2bc274708a8d4f2865a07
-
-  - name: pyside6
-    buildsystem: simple
-    build-options:
-      build-args:
-        - --share=network
-    build-commands:
-      - pip3 install --prefix=/app --no-cache-dir PySide6-Essentials
-      - rm -rf /app/lib/python3.13/site-packages/PySide6/Qt/lib/
-      - rm -rf /app/lib/python3.13/site-packages/PySide6/Qt/plugins/
 
   - name: adbgui
     buildsystem: meson
