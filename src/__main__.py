@@ -83,6 +83,21 @@ class AdbBridge(QObject):
             return True
         return False
 
+    @Slot(list)
+    def freeze_apps(self, pkg_ids):
+        for pkg_id in pkg_ids:
+            self.freeze_app(pkg_id)
+
+    @Slot(list)
+    def unfreeze_apps(self, pkg_ids):
+        for pkg_id in pkg_ids:
+            self.unfreeze_app(pkg_id)
+
+    @Slot(list)
+    def uninstall_apps(self, pkg_ids):
+        for pkg_id in pkg_ids:
+            self.uninstall_app(pkg_id)
+
     # --- Внутренняя логика ---
 
     def _set_loading(self, v):
@@ -163,15 +178,6 @@ class AdbBridge(QObject):
             shutil.rmtree(self.icon_cache, ignore_errors=True)
 
 def main():
-    if not os.path.exists("/.flatpak-info"):
-        os.environ.update({
-            "QML2_IMPORT_PATH": "/usr/lib/qt6/qml",
-            "QT_PLUGIN_PATH": "/usr/lib/qt6/plugins",
-            "QT_QPA_PLATFORMTHEME": "kde",
-            "QT_QUICK_CONTROLS_STYLE": "org.kde.desktop",
-            "XDG_CURRENT_DESKTOP": "KDE"
-        })
-
     app = QGuiApplication(sys.argv)
     app.setApplicationName("AdbGUI")
 

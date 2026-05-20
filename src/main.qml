@@ -11,6 +11,15 @@ Kirigami.ApplicationWindow {
     title: "AdbGUI"
 
     readonly property var adbBackend: backend
+    property var selectedApps: []
+    property var selectedAppsData: []
+    property string selectionType: ""
+    property bool selectionIsOff: false
+    property bool selectionMode: selectedApps.length > 0
+    readonly property bool selectionHasActive:
+        selectedAppsData.some(a => !a.is_off)
+    readonly property bool selectionHasFrozen:
+        selectedAppsData.some(a => a.is_off)
 
     // Оверлей: устройство не подключено
     Rectangle {
@@ -148,6 +157,12 @@ Kirigami.ApplicationWindow {
             clip: true
 
             delegate: Controls.ItemDelegate {
+                id: appDelegate
+                readonly property bool isSelectable: !root.selectionMode ||
+                    (modelData.is_system && root.selectionType === "system" && modelData.is_off === root.selectionIsOff) ||
+                    (modelData.is_user && root.selectionType === "user")
+
+                opacity: appDelegate.isSelectable ? 1.0 : 0.35
                 width: listView.width
                 visible: {
                     if (listView.modelFilter === "") return true;
@@ -156,11 +171,31 @@ Kirigami.ApplicationWindow {
                 }
                 height: visible ? implicitHeight : 0
                 onClicked: {
+                    if (!appDelegate.isSelectable) return
                     appInfoSheet.appData = modelData
                     appInfoSheet.open()
                 }
 
                 contentItem: RowLayout {
+                    Controls.CheckBox {
+                        visible: appDelegate.isSelectable
+                        checked: root.selectedApps.includes(modelData.id)
+                        onClicked: {
+                            if (checked) {
+                                root.selectionType = modelData.is_system ? "system" : "user"
+                                root.selectionIsOff = modelData.is_off
+                                root.selectedApps = [...root.selectedApps, modelData.id]
+                                root.selectedAppsData = [...root.selectedAppsData, modelData]
+                            } else {
+                                root.selectedApps = root.selectedApps.filter(p => p !== modelData.id)
+                                root.selectedAppsData = root.selectedAppsData.filter(a => a.id !== modelData.id)
+                                if (root.selectedApps.length === 0) {
+                                    root.selectionType = ""
+                                    root.selectionIsOff = false
+                                }
+                            }
+                        }
+                    }
                     spacing: 12
                     Kirigami.Icon {
                         source: modelData.icon || "package-x-generic"
@@ -188,19 +223,80 @@ Kirigami.ApplicationWindow {
                         Controls.Button {
                             icon.name: modelData.is_off ? "media-playback-start" : "system-shutdown"
                             flat: true
-                            visible: modelData.is_system
+                            visible: modelData.is_system  && !root.selectionMode
                             onClicked: modelData.is_off ? backend.unfreeze_app(modelData.id) : backend.freeze_app(modelData.id)
                         }
                         Controls.Button {
                             icon.name: "edit-delete"
                             flat: true
-                            visible: modelData.is_user
+                            visible: modelData.is_user  && !root.selectionMode
                             onClicked: {
                                 uninstallDialog.currentPkgId = modelData.id
                                 uninstallDialog.currentAppTitle = modelData.title
                                 uninstallDialog.open()
                             }
                         }
+                    }
+                }
+            }
+        }
+        footer: Controls.ToolBar {
+            visible: root.selectionMode
+            height: root.selectionMode ? implicitHeight : 0
+            RowLayout {
+                anchors.fill: parent
+                anchors.margins: Kirigami.Units.smallSpacing
+
+                Controls.Button {
+                    text: "Снять выделение"
+                    icon.name: "edit-clear"
+                    flat: true
+                    onClicked: {
+                        root.selectedApps = []
+                        root.selectedAppsData = []
+                        root.selectionType = ""
+                        root.selectionIsOff = false
+                    }
+                }
+                Controls.Label {
+                    text: "Выбрано: " + root.selectedApps.length
+                    Layout.fillWidth: true
+                    font.bold: true
+                }
+                Controls.Button {
+                    text: "Заморозить"
+                    icon.name: "system-shutdown"
+                    visible: root.selectionType === "system" && root.selectionHasActive
+                    onClicked: {
+                        backend.freeze_apps(root.selectedApps)
+                        root.selectedApps = []
+                        root.selectedAppsData = []
+                        root.selectionType = ""
+                        root.selectionIsOff = false
+                    }
+                }
+                Controls.Button {
+                    text: "Разморозить"
+                    icon.name: "media-playback-start"
+                    visible: root.selectionType === "system" && root.selectionHasFrozen
+                    onClicked: {
+                        backend.unfreeze_apps(root.selectedApps)
+                        root.selectedApps = []
+                        root.selectedAppsData = []
+                        root.selectionType = ""
+                        root.selectionIsOff = false
+                    }
+                }
+                Controls.Button {
+                    text: "Удалить"
+                    icon.name: "edit-delete"
+                    visible: root.selectionType === "user"
+                    onClicked: {
+                        backend.uninstall_apps(root.selectedApps)
+                        root.selectedApps = []
+                        root.selectedAppsData = []
+                        root.selectionType = ""
+                        root.selectionIsOff = false
                     }
                 }
             }
