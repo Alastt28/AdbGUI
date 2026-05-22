@@ -1,4 +1,4 @@
-project('adbgui', version: '0.2.0', meson_version: '>= 1.0.0')
+project('adbgui', version: '0.3.0', meson_version: '>= 1.0.0')
 
 python = import('python').find_installation('python3')
 py_site = get_option('prefix') / 'lib' / 'python' + python.language_version() / 'site-packages'
